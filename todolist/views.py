@@ -23,13 +23,15 @@ def todo(request):
             return redirect('/todo')
 
         if 'Delete' in request.POST:
-            checkedlist = request.POST.getlist('checkbox')
+            checkedlist = request.POST.getlist('checkedbox')
+
+            print("DELETE:", checkedlist)
 
             for i in range(len(checkedlist)):
                 todo = TodoList.objects.filter(id=int(checkedlist[i]))
                 todo.delete()
 
-    return render(request, 'todo.html', {'todo': todos, 'categories': categories})
+    return render(request, 'todo.html', {'todos': todos, 'categories': categories})
 
 
 def category(request):
